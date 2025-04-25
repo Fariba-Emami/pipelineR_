@@ -50,9 +50,16 @@ jobs:
             any::testthat
           needs: testthat
 
+      - name: Debug - List files and check renv.lock
+        run: |
+          echo "Checking if renv.lock exists:"
+          ls -l
+          cat renv.lock || echo "renv.lock not found"
+
       - name: Restore renv environment
         run: |
           install.packages("renv")
+          # setwd("your/project/folder")  # Uncomment and edit if renv.lock is not in root
           renv::restore()
         shell: Rscript {0}
 
